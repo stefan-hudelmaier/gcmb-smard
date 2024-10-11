@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 import requests
 
-energy_types = {
+production_types = {
     '1223': 'brown-coal',
     '1224': 'nuclear',
     '1225': 'wind-offshore',
@@ -16,6 +16,7 @@ energy_types = {
     '4071': 'natural-gas'
 }
 
+# TODO: Also add consumption
 consumption_types = {
     '410': 'total',
     '4359': 'residual',
@@ -49,13 +50,24 @@ def get_last_value(energy_filter, country_filter):
 
 
 def main():
+    collect_data()
+
+
+def collect_data():
+    data = []
     for country in countries:
         print(f"Country: {country}")
-        for energy_type_code, energy_type_name in energy_types.items():
+        for energy_type_code, energy_type_name in production_types.items():
             print(f"Energy type: {energy_type_name}")
             last_value = get_last_value(energy_type_code, country)
             print(f"Country: {country}, Energy type: {energy_type_name}, Value: {last_value.value}")
-
+            data.append({
+                'country': country,
+                'energy_type': energy_type_name,
+                'value': last_value.value,
+                'timestamp': last_value.timestamp,
+                'type': 'production'
+            })
 
 
 if __name__ == '__main__':
