@@ -9,9 +9,11 @@ can be found [here](https://www.smard.de/en/datennutzung).
 
 ## Current Energy Production in Germany
 
-* Photovoltaic: <Topic topic="DE/production/photovoltaic/value" />
-* Brown Coal: <Topic topic="DE/production/brown-coal/value" />
-* Wind Offshore: <Topic topic="DE/production/wind-offshore/value" />
+The following is the production in the last available 15m period:
+
+* Photovoltaic: <Topic topic="DE/production/photovoltaic/value" /> MWh
+* Brown Coal: <Topic topic="DE/production/brown-coal/value" /> MWh
+* Wind Offshore: <Topic topic="DE/production/wind-offshore/value" /> MWh
 
 ## Topic structure
 
