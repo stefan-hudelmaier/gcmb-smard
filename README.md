@@ -13,6 +13,8 @@ can be found [here](https://www.smard.de/en/datennutzung).
 
 The data collector is implemented in Python. It uses Poetry as a build system.
 
+Information about the used API can be found [here on GitHub](https://github.com/bundesAPI/smard-api)
+
 ## Usage
 
 Clone this repository and fetch the dependencies using:
