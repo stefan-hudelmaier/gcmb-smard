@@ -11,6 +11,25 @@ can be found [here](https://www.smard.de/en/datennutzung).
 
 The following is the production in the last available 15m period:
 
+### Chart
+
+<PieChart>
+  <PieChartSegment topic="stefan/smard/DE/production/biomass/value" label="Biomass" />
+  <PieChartSegment topic="stefan/smard/DE/production/brown-coal/value" label="Brown Coal" />
+  <PieChartSegment topic="stefan/smard/DE/production/hard-coal/value" label="Hard Coal" />
+  <PieChartSegment topic="stefan/smard/DE/production/hydro/value" label="Hydro" />
+  <PieChartSegment topic="stefan/smard/DE/production/misc-conventional/value" label="Misc Conventional" />
+  <PieChartSegment topic="stefan/smard/DE/production/misc-renewable/value" label="Misc Renewable" />
+  <PieChartSegment topic="stefan/smard/DE/production/natural-gas/value" label="Natural Gas" />
+  <PieChartSegment topic="stefan/smard/DE/production/nuclear/value" label="Nuclear" />
+  <PieChartSegment topic="stefan/smard/DE/production/photovoltaic/value" label="Photovoltaic" />
+  <PieChartSegment topic="stefan/smard/DE/production/pumped-storage/value" label="Pumped Storage" />
+  <PieChartSegment topic="stefan/smard/DE/production/wind-offshore/value" label="Wind Offshore" />
+  <PieChartSegment topic="stefan/smard/DE/production/wind-onshore/value" label="Wind Onshore" />
+</PieChart>
+
+### Data
+
 * Biomass: <Topic topic="stefan/smard/DE/production/biomass/value" /> MWh
 * Brown Coal: <Topic topic="stefan/smard/DE/production/brown-coal/value" /> MWh
 * Hard Coal: <Topic topic="stefan/smard/DE/production/hard-coal/value" /> MWh
