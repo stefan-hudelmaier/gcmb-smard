@@ -14,7 +14,7 @@ load_dotenv()
 
 broker = 'gcmb.io'
 port = 8883
-client_id = 'stefan/smard/data-generator/pub'
+client_id = os.environ.get('MQTT_CLIENT_ID', 'stefan/smard/data-generator/pub')
 username = os.environ['MQTT_USERNAME']
 password = os.environ['MQTT_PASSWORD']
 
@@ -53,62 +53,73 @@ energy_types = [
     {
         'code': '1223',
         'name': 'brown-coal',
+        'renewable': False,
         'type': 'production'
     },
     {
         'code': '1224',
         'name': 'nuclear',
+        'renewable': False,
         'type': 'production'
     },
     {
         'code': '1225',
         'name': 'wind-offshore',
+        'renewable': True,
         'type': 'production'
     },
     {
         'code': '1226',
         'name': 'hydro',
+        'renewable': True,
         'type': 'production'
-
     },
     {
         'code': '1227',
         'name': 'misc-conventional',
+        'renewable': False,
         'type': 'production'
     },
     {
         'code': '1228',
         'name': 'misc-renewable',
+        'renewable': True,
         'type': 'production'
     },
     {
         'code': '4066',
         'name': 'biomass',
+        'renewable': True,
         'type': 'production'
     },
     {
         'code': '4067',
         'name': 'wind-onshore',
+        'renewable': True,
         'type': 'production'
     },
     {
         'code': '4068',
         'name': 'photovoltaic',
+        'renewable': True,
         'type': 'production'
     },
     {
         'code': '4069',
         'name': 'hard-coal',
+        'renewable': False,
         'type': 'production'
     },
     {
         'code': '4070',
         'name': 'pumped-storage',
+        'renewable': True,
         'type': 'production'
     },
     {
         'code': '4071',
         'name': 'natural-gas',
+        'renewable': False,
         'type': 'production'
     },
     {
@@ -188,11 +199,27 @@ def main():
     while True:
         count = 0
         data = collect_data()
+        total_renewable_production_by_country = {}
+        total_conventional_production_by_country = {}
         for entry in data:
             try:
-                base_topic = f"stefan/smard/{entry['country']}/{entry['type']}/{entry['energy_type']}"
+                country = entry['country']
+                renewable = entry['renewable']
+                value = entry['value']
+                production_or_consumption = entry['type']
+                if production_or_consumption == 'production':
+                    if renewable:
+                        if country not in total_renewable_production_by_country:
+                            total_renewable_production_by_country[country] = 0
+                        total_renewable_production_by_country[entry['country']] += value
+                    else:
+                        if country not in total_conventional_production_by_country:
+                            total_conventional_production_by_country[country] = 0
+                        total_conventional_production_by_country[entry['country']] += value
+
+                base_topic = f"stefan/smard/{country}/{entry['type']}/{entry['energy_type']}"
                 topic = f"{base_topic}/value"
-                payload = str(entry['value'])
+                payload = str(value)
                 logger.info(f"Publishing to {topic}: {payload}")
                 mqtt_publish(mqtt_client, topic, payload)
                 count += 1
@@ -201,7 +228,7 @@ def main():
                 timestamp_iso8601 = datetime.fromtimestamp(entry['timestamp'] / 1000).isoformat() + 'Z'
 
                 json_payload = {
-                    'value': entry['value'],
+                    'value': value,
                     'timestamp': timestamp_iso8601,
                     'resolution': '15m',
                     'unit': 'MWh'
@@ -214,8 +241,27 @@ def main():
             except Exception as e:
                 logger.error(f"Error publishing data: {e}")
 
+        # Publish total renewable and conventional
+        for country in countries:
+            try:
+                conventional = total_conventional_production_by_country.get(country, 0)
+                total_conventional_topic = f"stefan/smard/{country}/production/total-conventional"
+                total_conventional_payload = str(conventional)
+                logger.info(f"Publishing to {total_conventional_topic}: {total_conventional_payload}")
+                mqtt_publish(mqtt_client, total_conventional_topic, total_conventional_payload)
+
+                renewable = total_renewable_production_by_country.get(country, 0)
+                total_renewable_topic = f"stefan/smard/{country}/production/total-renewable"
+                total_renewable_payload = str(renewable)
+                logger.info(f"Publishing to {total_renewable_topic}: {total_renewable_payload}")
+                mqtt_publish(mqtt_client, total_renewable_topic, total_renewable_payload)
+
+            except Exception as e:
+                logger.error(f"Error publishing total data: {e}")
+
+
         logger.info(f"Published {count} messages")
-        sleep(interval)
+        sleep(float(interval))
 
 
 def collect_data():
@@ -234,7 +280,8 @@ def collect_data():
                     'energy_type': name,
                     'value': last_value.value,
                     'timestamp': last_value.timestamp,
-                    'type': production_or_consumption
+                    'type': production_or_consumption,
+                    'renewable': energy_type.get('renewable', False)
                 })
             except Exception as e:
                 logger.error(f"Error for country {country} and energy type {energy_type}: {e}")
