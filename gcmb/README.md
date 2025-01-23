@@ -13,12 +13,12 @@ The following is the production in the last available 15m period:
 
 ### Conventional vs Renewable Energy Sources
 
-Right now <Topic topic="stefan/smard/DE/production/total-renewable/percent" unit="%" /> of energy is
+Right now <Topic topic="stefan/smard/DE/production/total-renewable/percent" unit="%" decimals="1"/> of energy is
 produced from renewable sources in Germany.
 
 <PieChart>
-  <Slice topic="stefan/smard/DE/production/total-renewable/value" label="Total Renewable" />
   <Slice topic="stefan/smard/DE/production/total-conventional/value" label="Total Conventional" />
+  <Slice topic="stefan/smard/DE/production/total-renewable/value" label="Total Renewable" />
 </PieChart>
 
 ### Individual Energy Sources
@@ -40,18 +40,23 @@ produced from renewable sources in Germany.
 
 ### Data
 
+#### Renewable
+
 * Biomass: <Topic topic="stefan/smard/DE/production/biomass/value" /> MWh
-* Brown Coal: <Topic topic="stefan/smard/DE/production/brown-coal/value" /> MWh
-* Hard Coal: <Topic topic="stefan/smard/DE/production/hard-coal/value" /> MWh
 * Hydro: <Topic topic="stefan/smard/DE/production/hydro/value" /> MWh
-* Misc Conventional: <Topic topic="stefan/smard/DE/production/misc-conventional/value" /> MWh
 * Misc Renewable: <Topic topic="stefan/smard/DE/production/misc-renewable/value" /> MWh
-* Natural Gas: <Topic topic="stefan/smard/DE/production/natural-gas/value" /> MWh
-* Nuclear: <Topic topic="stefan/smard/DE/production/nuclear/value" /> MWh
 * Photovoltaic: <Topic topic="stefan/smard/DE/production/photovoltaic/value" /> MWh
 * Pumped Storage: <Topic topic="stefan/smard/DE/production/pumped-storage/value" /> MWh
 * Wind Offshore: <Topic topic="stefan/smard/DE/production/wind-offshore/value" /> MWh
 * Wind Onshore: <Topic topic="stefan/smard/DE/production/wind-onshore/value" /> MWh
+
+#### Conventional
+
+* Brown Coal: <Topic topic="stefan/smard/DE/production/brown-coal/value" /> MWh
+* Hard Coal: <Topic topic="stefan/smard/DE/production/hard-coal/value" /> MWh
+* Misc Conventional: <Topic topic="stefan/smard/DE/production/misc-conventional/value" /> MWh
+* Natural Gas: <Topic topic="stefan/smard/DE/production/natural-gas/value" /> MWh
+* Nuclear: <Topic topic="stefan/smard/DE/production/nuclear/value" /> MWh
 
 ## Topic structure
 
