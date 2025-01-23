@@ -23,6 +23,8 @@ produced from renewable sources in Germany.
 
 ### Individual Energy Sources
 
+The production is distributed as follows:
+
 <PieChart>
   <Slice topic="stefan/smard/DE/production/biomass/value" label="Biomass" />
   <Slice topic="stefan/smard/DE/production/brown-coal/value" label="Brown Coal" />
