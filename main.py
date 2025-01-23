@@ -172,7 +172,7 @@ def connect_mqtt():
 
 def mqtt_publish(client, topic, msg):
     result = client.publish(topic, msg, retain=True)
-    status = result[0]
+    status = result.rc
     if status == 0:
         logger.debug(f"Sent '{msg}' to topic {topic}")
     else:
@@ -220,7 +220,6 @@ def main():
                 base_topic = f"stefan/smard/{country}/{entry['type']}/{entry['energy_type']}"
                 topic = f"{base_topic}/value"
                 payload = str(value)
-                logger.info(f"Publishing to {topic}: {payload}")
                 mqtt_publish(mqtt_client, topic, payload)
                 count += 1
 
@@ -245,16 +244,19 @@ def main():
         for country in countries:
             try:
                 conventional = total_conventional_production_by_country.get(country, 0)
-                total_conventional_topic = f"stefan/smard/{country}/production/total-conventional"
+                total_conventional_topic = f"stefan/smard/{country}/production/total-conventional/value"
                 total_conventional_payload = str(conventional)
-                logger.info(f"Publishing to {total_conventional_topic}: {total_conventional_payload}")
                 mqtt_publish(mqtt_client, total_conventional_topic, total_conventional_payload)
 
                 renewable = total_renewable_production_by_country.get(country, 0)
-                total_renewable_topic = f"stefan/smard/{country}/production/total-renewable"
+                total_renewable_topic = f"stefan/smard/{country}/production/total-renewable/value"
                 total_renewable_payload = str(renewable)
-                logger.info(f"Publishing to {total_renewable_topic}: {total_renewable_payload}")
                 mqtt_publish(mqtt_client, total_renewable_topic, total_renewable_payload)
+
+                percent_renewable = (renewable / (conventional + renewable)) * 100.0
+                total_renewable_percent_topic = f"stefan/smard/{country}/production/total-renewable/percent"
+                total_renewable_percent_payload = str(percent_renewable)
+                mqtt_publish(mqtt_client, total_renewable_percent_topic, total_renewable_percent_payload)
 
             except Exception as e:
                 logger.error(f"Error publishing total data: {e}")

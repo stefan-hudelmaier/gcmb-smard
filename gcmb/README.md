@@ -11,7 +11,17 @@ can be found [here](https://www.smard.de/en/datennutzung).
 
 The following is the production in the last available 15m period:
 
-### Chart
+### Conventional vs Renewable Energy Sources
+
+Right now <Topic topic="stefan/smard/DE/production/total-renewable/percent" unit="%" /> of energy is
+produced from renewable sources in Germany.
+
+<PieChart>
+  <Slice topic="stefan/smard/DE/production/total-renewable/value" label="Total Renewable" />
+  <Slice topic="stefan/smard/DE/production/total-conventional/value" label="Total Conventional" />
+</PieChart>
+
+### Individual Energy Sources
 
 <PieChart>
   <Slice topic="stefan/smard/DE/production/biomass/value" label="Biomass" />
