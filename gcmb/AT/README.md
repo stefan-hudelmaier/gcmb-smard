@@ -6,7 +6,7 @@ The following is the production in the last available 15m period:
 
 ### Conventional vs Renewable Energy Sources
 
-Right now <Topic topic="stefan/smard/AT/production/total-renewable/percent" unit="%" decimals="1"/> of energy is
+Right now <Value topic="stefan/smard/AT/production/total-renewable/percent" unit="%" decimals="1"/> of energy is
 produced from renewable sources in Austria.
 
 <PieChart>
@@ -34,18 +34,18 @@ produced from renewable sources in Austria.
 
 #### Renewable
 
-* Biomass: <Topic topic="stefan/smard/AT/production/biomass/value" /> MWh
-* Hydro: <Topic topic="stefan/smard/AT/production/hydro/value" /> MWh
-* Misc Renewable: <Topic topic="stefan/smard/AT/production/misc-renewable/value" /> MWh
-* Photovoltaic: <Topic topic="stefan/smard/AT/production/photovoltaic/value" /> MWh
-* Pumped Storage: <Topic topic="stefan/smard/AT/production/pumped-storage/value" /> MWh
-* Wind Offshore: <Topic topic="stefan/smard/AT/production/wind-offshore/value" /> MWh
-* Wind Onshore: <Topic topic="stefan/smard/AT/production/wind-onshore/value" /> MWh
+* Biomass: <Value topic="stefan/smard/AT/production/biomass/value" /> MWh
+* Hydro: <Value topic="stefan/smard/AT/production/hydro/value" /> MWh
+* Misc Renewable: <Value topic="stefan/smard/AT/production/misc-renewable/value" /> MWh
+* Photovoltaic: <Value topic="stefan/smard/AT/production/photovoltaic/value" /> MWh
+* Pumped Storage: <Value topic="stefan/smard/AT/production/pumped-storage/value" /> MWh
+* Wind Offshore: <Value topic="stefan/smard/AT/production/wind-offshore/value" /> MWh
+* Wind Onshore: <Value topic="stefan/smard/AT/production/wind-onshore/value" /> MWh
 
 #### Conventional
 
-* Brown Coal: <Topic topic="stefan/smard/AT/production/brown-coal/value" /> MWh
-* Hard Coal: <Topic topic="stefan/smard/AT/production/hard-coal/value" /> MWh
-* Misc Conventional: <Topic topic="stefan/smard/AT/production/misc-conventional/value" /> MWh
-* Natural Gas: <Topic topic="stefan/smard/AT/production/natural-gas/value" /> MWh
-* Nuclear: <Topic topic="stefan/smard/AT/production/nuclear/value" /> MWh
+* Brown Coal: <Value topic="stefan/smard/AT/production/brown-coal/value" /> MWh
+* Hard Coal: <Value topic="stefan/smard/AT/production/hard-coal/value" /> MWh
+* Misc Conventional: <Value topic="stefan/smard/AT/production/misc-conventional/value" /> MWh
+* Natural Gas: <Value topic="stefan/smard/AT/production/natural-gas/value" /> MWh
+* Nuclear: <Value topic="stefan/smard/AT/production/nuclear/value" /> MWh
